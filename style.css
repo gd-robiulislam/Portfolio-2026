@@ -1,0 +1,587 @@
+/* =========================
+   ROOT VARIABLES
+========================= */
+
+:root {
+  --bg: #0b0f14;
+  --card: #121821;
+  --cyan: #00e0ff;
+  --text: #ffffff;
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: white;
+}
+
+/* Only hide cursor on devices that actually have a mouse */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .cursor {
+    display: none !important;
+  }
+}
+
+section {
+  padding: 120px 10%;
+  text-align: center;
+  position: relative;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+
+#loader.hide-loader {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#loader h1 {
+  color: var(--cyan);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: .3; }
+  50% { opacity: 1; }
+}
+
+/* =========================
+   CUSTOM CURSOR
+========================= */
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;  /* prevents click blocking */
+  box-shadow: 0 0 20px var(--cyan);
+  z-index: 99999;
+  transition: transform 0.1s ease;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 20px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+nav h2 span,
+nav span {
+  color: var(--cyan);
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  transition: .3s;
+  position: relative;
+}
+
+nav a:hover {
+  color: var(--cyan);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero h1 {
+  font-size: 70px;
+  line-height: 1.2;
+}
+
+.hero span {
+  color: var(--cyan);
+}
+
+/* =========================
+   GLITCH EFFECT
+========================= */
+
+.glitch {
+  position: relative;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 2px var(--cyan); }
+  50% { text-shadow: -2px -2px red; }
+  100% { text-shadow: 2px 2px var(--cyan); }
+}
+
+/* =========================
+   PORTFOLIO
+========================= */
+
+.filters {
+  margin: 40px 0;
+}
+
+.filters button {
+  margin: 0 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.filters button:hover {
+  background: var(--cyan);
+  color: black;
+}
+
+.active-btn {
+  background: var(--cyan);
+  color: black;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  cursor: pointer;
+  background: var(--card);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform .6s ease;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.9), rgba(0,224,255,.2));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: .4s ease;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+}
+
+.overlay h3 {
+  color: white;
+}
+
+.overlay p {
+  color: var(--cyan);
+  font-size: 14px;
+}
+
+/* filtering hide */
+.hide {
+  display: none !important;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.service {
+  padding: 40px;
+  background: var(--card);
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+
+.service:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 20px var(--cyan);
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: auto;
+}
+
+input, textarea {
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 6px;
+  outline: none;
+  transition: .3s;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid var(--cyan);
+}
+
+button {
+  padding: 12px;
+  background: var(--cyan);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: .3s ease;
+}
+
+button:hover {
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 30px;
+  background: #000;
+  text-align: center;
+}
+
+/* =========================
+   SCROLL REVEAL
+========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 6%;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  nav ul li {
+    width: 100%;
+  }
+
+  nav ul li a {
+    display: block;
+    padding: 8px 0;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  section {
+    padding: 100px 6%;
+  }
+}
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--cyan);
+  width: 0%;
+  z-index: 9999;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+}
+
+section {
+  opacity: 0;
+  animation: fadeInSection 1s ease forwards;
+}
+
+@keyframes fadeInSection {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 72px;
+  line-height: 1.1;
+  overflow: hidden;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.hero-title .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+  animation: slideUp 1s forwards;
+}
+
+.hero-title .line:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.highlight {
+  color: var(--cyan);
+  font-weight: 700;
+  text-shadow:
+    0 0 4px rgba(0,224,255,0.6),
+    0 0 10px rgba(0,224,255,0.4);
+}
+
+.hero-sub {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #aaa;
+  min-height: 30px;
+}
+
+.hero-buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+}
+
+.hero-buttons button {
+  padding: 14px 28px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  transition: transform 0.2s ease;
+  transform-style: preserve-3d;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+  z-index: 9999;
+}
+
+.modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: var(--card);
+  padding: 40px;
+  max-width: 500px;
+  border-radius: 12px;
+  text-align: center;
+  transform: scale(0.8);
+  transition: 0.4s ease;
+}
+
+.modal.active .modal-content {
+  transform: scale(1);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--cyan);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: var(--card);
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+}
+
+#closeModal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--cyan);
+}
+
+/* ===== Animated Background Grid ===== */
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(0,224,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,224,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: moveGrid 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes moveGrid {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
+.bg-grid {
+  filter: blur(0.5px);
+}
+
