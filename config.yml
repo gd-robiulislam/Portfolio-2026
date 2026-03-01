@@ -1,0 +1,18 @@
+backend:
+  name: git-gateway
+  branch: main # or master, whichever your branch is named
+
+media_folder: "assets/images" # Where your Lambo and logo images will be stored
+public_folder: "/assets/images"
+
+collections:
+  - name: "portfolio"
+    label: "My Projects"
+    folder: "content/portfolio"
+    create: true
+    slug: "{{title}}"
+    fields:
+      - {label: "Project Title", name: "title", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["Branding", "Social", "Logo", "Motion"]}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Description", name: "body", widget: "markdown"}
