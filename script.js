@@ -213,22 +213,31 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function loadAdminProjects() {
-  const response = await fetch('/projects.json');
-  const data = await response.json();
-  const grid = document.querySelector('.grid');
+    try {
+        const response = await fetch('/projects.json');
+        const data = await response.json();
+        const grid = document.querySelector('.grid');
 
-  data.items.forEach(item => {
-    const card = `
-      <div class="card ${item.category} reveal">
-        <img src="${item.image}" alt="${item.title}">
-        <div class="overlay">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-        </div>
-      </div>`;
-    grid.insertAdjacentHTML('beforeend', card);
-  });
+        // This loops through the 'projects' list in your JSON
+        data.projects.forEach(project => {
+            const card = document.createElement('div');
+            card.className = `card ${project.category} reveal`;
+            card.innerHTML = `
+                <img src="${project.image}" alt="${project.title}">
+                <div class="overlay">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+        
+        // Re-run your reveal animation if you have one
+        if(typeof ScrollReveal !== 'undefined') ScrollReveal().reveal('.reveal');
+        
+    } catch (error) {
+        console.log("No projects found in projects.json yet.");
+    }
 }
 
-// Call this after the DOM is loaded
 document.addEventListener('DOMContentLoaded', loadAdminProjects);
