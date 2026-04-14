@@ -6,15 +6,15 @@ media_folder: "assets/images" # Where your Lambo and logo images will be stored
 public_folder: "/assets/images"
 
 collections:
-  - name: "portfolio_data"
-    label: "Portfolio Projects"
-    file: "projects.json" # This creates a single file your JS can read
+  - name: "projects"
+    label: "Projects"
+    file: "projects.json" # One file instead of many .md files
     fields:
-      - name: "projects"
-        label: "Projects"
+      - name: "items"
+        label: "Project List"
         widget: "list"
         fields:
-          - {label: "Project Title", name: "title", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
           - {label: "Category", name: "category", widget: "select", options: ["branding", "social", "logo", "motion"]}
-          - {label: "Featured Image", name: "image", widget: "image"}
-          - {label: "Description", name: "description", widget: "string"}
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Description", name: "description", widget: "text"}
