@@ -211,3 +211,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+async function loadProjects() {
+  const response = await fetch('content/portfolio');
+  const projects = await response.json();
+  const grid = document.getElementById('portfolio-grid');
+
+  projects.forEach(project => {
+    grid.innerHTML += `
+      <div class="card ${project.category}">
+        <img src="${project.image}" alt="">
+        <div class="overlay">
+          <h3>${project.title}</h3>
+          <p>${project.description}</p>
+        </div>
+      </div>
+    `;
+  });
+}
