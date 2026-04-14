@@ -212,30 +212,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-async function loadProjects() {
-  try {
-    const response = await fetch('/projects.json');
-    const data = await response.json();
-    const grid = document.querySelector('.grid');
+async function loadAdminProjects() {
+  const response = await fetch('/projects.json');
+  const data = await response.json();
+  const grid = document.querySelector('.grid');
 
-    // This clears the hard-coded items if you want only admin items to show
-    // grid.innerHTML = ''; 
-
-    data.projects.forEach(project => {
-      const card = document.createElement('div');
-      card.className = `card ${project.category}`;
-      card.innerHTML = `
-        <img src="${project.image}" alt="${project.title}">
+  data.items.forEach(item => {
+    const card = `
+      <div class="card ${item.category} reveal">
+        <img src="${item.image}" alt="${item.title}">
         <div class="overlay">
-          <h3>${project.title}</h3>
-          <p>${project.description}</p>
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
         </div>
-      `;
-      grid.appendChild(card);
-    });
-  } catch (e) {
-    console.error("Error loading projects:", e);
-  }
+      </div>`;
+    grid.insertAdjacentHTML('beforeend', card);
+  });
 }
 
-document.addEventListener('DOMContentLoaded', loadProjects);
+// Call this after the DOM is loaded
+document.addEventListener('DOMContentLoaded', loadAdminProjects);
